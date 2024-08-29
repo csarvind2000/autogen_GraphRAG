@@ -10,8 +10,6 @@ This application integrates GraphRAG with AutoGen agents, powered by local LLMs 
 server.
  - **Interactive UI:** - Deploying Chainlit UI to handle continuous conversations, multi-threading, and user input settings.
 
-![Main Interfacce](https://github.com/karthik-codex/autogen_graphRAG/blob/main/images/UI1.webp?raw=true)
-![Widget Settings](https://github.com/karthik-codex/autogen_graphRAG/blob/main/images/U2.webp?raw=true)
 
 
 ## 📦 Installation and Setup Linux
