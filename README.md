@@ -13,9 +13,6 @@ server.
 ![Main Interfacce](https://github.com/karthik-codex/autogen_graphRAG/blob/main/images/UI1.webp?raw=true)
 ![Widget Settings](https://github.com/karthik-codex/autogen_graphRAG/blob/main/images/U2.webp?raw=true)
 
-## Useful Links 🔗
-
-- **Full Guide:** Microsoft's GraphRAG + AutoGen + Ollama + Chainlit = Fully Local & Free Multi-Agent RAG Superbot [Medium.com](https://medium.com/@karthik.codex/microsofts-graphrag-autogen-ollama-chainlit-fully-local-free-multi-agent-rag-superbot-61ad3759f06f) 📚
 
 ## 📦 Installation and Setup Linux
 
@@ -53,6 +50,19 @@ Follow these steps to set up and run AutoGen GraphRAG Local with Ollama and Chai
     ```      
 5. **Create embeddings and knowledge graph:**
     ```bash
+    python ./utils/pdf_to_markdown.py
+
+    Better to remove cache & old KG embeddings
+
+
+    rm -f cache
+    rm -f ./output
+
+    mkdir ./output
+
+    KG embeddings creating 
+
+
     python -m graphrag.index --root .
     ```         
 6. **Start Lite-LLM proxy server:**
@@ -64,9 +74,9 @@ Follow these steps to set up and run AutoGen GraphRAG Local with Ollama and Chai
     chainlit run appUI.py
     ```                
 
-## 📦 Installation and Setup Windows
+## 📦 Installation and Setup MAC
 
-Follow these steps to set up and run AutoGen GraphRAG Local with Ollama and Chainlit UI on Windows:
+Follow these steps to set up and run AutoGen GraphRAG Local with Ollama and Chainlit UI on MAC:
 
 1. **Install LLMs:**
 
@@ -100,6 +110,19 @@ Follow these steps to set up and run AutoGen GraphRAG Local with Ollama and Chai
     ```      
 5. **Create embeddings and knowledge graph:**
     ```pwsh
+    python ./utils/pdf_to_markdown.py
+
+    Better to remove cache & old KG embeddings
+
+
+    rm -f cache
+    rm -f ./output
+
+    mkdir ./output
+
+    KG embeddings creating 
+
+
     python -m graphrag.index --root .
     ```         
 6. **Start Lite-LLM proxy server:**
