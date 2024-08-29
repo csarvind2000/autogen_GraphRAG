@@ -2,9 +2,8 @@ import autogen
 from rich import print
 import chainlit as cl
 from typing_extensions import Annotated
-from chainlit.input_widget import (
-   Select, Slider, Switch)
-from autogen import AssistantAgent, UserProxyAgent
+from chainlit.input_widget import Select, Slider, Switch
+from autogen import AssistantAgent
 from utils.chainlit_agents import ChainlitUserProxyAgent, ChainlitAssistantAgent
 from graphrag.query.cli import run_global_search, run_local_search
 
@@ -130,14 +129,16 @@ async def run_conversation(message: cl.Message):
         await cl.Message(content=result).send()
         return result
 
-    for caller in [retriever]:
-        d_retrieve_content = caller.register_for_llm(
-            description="retrieve content for code generation and question answering.", api_style="function"
-        )(query_graphRAG)
+    # Register the function with the retriever agent
+    retriever.register_for_llm(
+        description="Retrieve content for code generation and question answering.", api_style="function"
+    )(query_graphRAG)
 
+    # Register the function for execution with both agents
     for agents in [user_proxy, retriever]:
-        agents.register_for_execution()(d_retrieve_content)
+        agents.register_for_execution()(query_graphRAG)
 
+    # Setting up the group chat with autogen
     groupchat = autogen.GroupChat(
         agents=[user_proxy, retriever],
         messages=[],
@@ -145,6 +146,7 @@ async def run_conversation(message: cl.Message):
         speaker_selection_method=state_transition,
         allow_repeat_speaker=True,
     )
+    
     manager = autogen.GroupChatManager(
         groupchat=groupchat,
         llm_config=llm_config_autogen, 
@@ -159,4 +161,3 @@ async def run_conversation(message: cl.Message):
         await cl.make_async(user_proxy.send)(manager, message=CONTEXT)
     elif len(groupchat.messages) == MAX_ITER:  
         await cl.make_async(user_proxy.send)(manager, message="exit")
-

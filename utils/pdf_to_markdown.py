@@ -130,13 +130,13 @@ def multiple():
 
 
 def single():
-    fname = 'input/toray/Toray-Cetex-TC910_PA6_PDS.pdf' #'input/solvay/Composite_Aerospace_Brochure.pdf'
+    fname = '/Users/sumedh/code/autogen_graphRAG/input/pdfInput/Generative_AI_Market_Trends_2024.pdf' #'input/solvay/Composite_Aerospace_Brochure.pdf'
     model_lst = load_all_models()
     full_text, images, out_meta = convert_single_pdf(fname, model_lst, max_pages=None, langs=None, batch_multiplier=2, start_page=None)
 
     fname = os.path.basename(fname)
 
-    output = 'input/markdown'
+    output = '/Users/sumedh/code/autogen_graphRAG/input/markdown'
     subfolder_path = save_markdown(output, fname, full_text, images, out_meta)
 
     print(f"Saved markdown to the {subfolder_path} folder")
